@@ -32,6 +32,7 @@
         :pagination="{ clickable: true }"
         :navigation="true"
         :loop="true"
+        :breakpoints="breakpoints"
         >
             <swiper-slide>
                 <article class="relative overflow-hidden group ">
@@ -306,5 +307,21 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
+const breakpoints = {
+  320: {
+    slidesPerView: 2, // در اندازه 320px و بالاتر، دو اسلاید نمایش داده می‌شود
+  },
+  640: {
+    slidesPerView: 3, // در اندازه 640px و بالاتر، سه اسلاید نمایش داده می‌شود
+  },
+  1024: {
+    slidesPerView: 4, // در اندازه 1024px و بالاتر، چهار اسلاید نمایش داده می‌شود
+  },
+  1500: {
+    slidesPerView: 5, // در اندازه 1024px و بالاتر، چهار اسلاید نمایش داده می‌شود
+  },
+  2000: {
+    slidesPerView: 7, // در اندازه 1024px و بالاتر، چهار اسلاید نمایش داده می‌شود
+  },
+};
 </script>
