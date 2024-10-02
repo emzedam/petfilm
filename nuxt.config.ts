@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      appBaseUrl: 'https://petfilm.petoman.com'
+      appBaseUrl: 'http://localhost:8000'
     }
   },
   compatibilityDate: '2024-04-03',
@@ -19,12 +19,18 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  vite: {
+    plugins: [
+      require('vite-svg-loader')()
+    ]
+  },
   app: {
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
-        dir: 'rtl'
+        dir: 'rtl',
+        class: ["dark"]
       },
       title: 'پت فیلم | پت و من',
       meta: [

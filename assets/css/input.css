@@ -80,4 +80,30 @@
         font-style: normal;
         font-display: swap;
       }
+
+
+      /* برای کل صفحه */
+      ::-webkit-scrollbar {
+        width: 9px; /* عرض اسکرول بار */
+        height: 9px; /* ارتفاع اسکرول بار برای اسکرول‌های افقی */
+      }
+
+      /* پس‌زمینه‌ی اسکرول بار */
+      ::-webkit-scrollbar-track {
+        background-color: #333232; /* رنگ پس‌زمینه‌ی مسیر اسکرول بار */
+        border-radius: 7px; /* گردی گوشه‌ها */
+      }
+
+      /* استایل نوار اسکرول */
+      ::-webkit-scrollbar-thumb {
+        background-color: #eab308; /* رنگ نوار اسکرول */
+        border-radius: 10px; /* گردی گوشه‌های نوار اسکرول */
+        border: 1px solid #eab308; /* فاصله از لبه‌ی اسکرول بار */
+      }
+
+      /* استایل نوار اسکرول هنگام هاور */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #fabd05; /* رنگ نوار اسکرول هنگام هاور */
+      }
+
     }

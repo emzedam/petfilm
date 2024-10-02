@@ -47,35 +47,14 @@
 
 
             <div class="profail flex items-center justify-start lg:px-2">
-
-                <div class="svg flex items-center justify-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="#57534e" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class>
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                        <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727" />
-                        <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727" />
-                    </svg>
-                </div>
-
-                <div class="svg flex items-center justify-start p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="#57534e" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M8 9h8" />
-                        <path d="M8 13h6" />
-                        <path
-                            d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
-                    </svg>
-                </div>
+                <!-- <div @click="changeThemeMode()" class="flex items-center justify-start p-2 hover:bg-gray-200 cursor-pointer rounded-xl transition-all ease-in">
+                    <SunIcon v-if="theme == 'dark'" />
+                    <MoonIcon v-if="theme == 'light'"  />
+                </div> -->
                 <div>
                     <button class="p-2 mx-3 bg-yellow-500 rounded-lg">
                         <nuxt-link class="flex" to="/auth/login">
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#000"  class="icon icon-tabler icons-tabler-filled icon-tabler-user ml-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg>ورود/ عضویت </nuxt-link> </button>
+                          <UserIcon/>  ورود/ عضویت </nuxt-link> </button>
                 </div>
             </div>
 
@@ -87,7 +66,14 @@
 
 <script setup> 
 import {useRoute , useRouter} from 'vue-router'
+import SunIcon from '~/assets/icons/svg/duelTone/sun.svg'
+import MoonIcon from '~/assets/icons/svg/duelTone/moon.svg'
+import UserIcon from '~/assets/icons/svg/duelTone/user.svg'
+import {usePetfilmStore} from '@/store/petfilmStore.js'
+import {storeToRefs} from 'pinia'
 
+const store = usePetfilmStore()
+const {theme} = storeToRefs(store)
 const router = useRouter()
 const search_query_param = ref(null)
 
@@ -96,4 +82,10 @@ const do_search_content = () => {
         router.push(`/search?query_string=${search_query_param.value}`)
     }
 }
+
+const changeThemeMode = () => {
+    store.change_theme_mode()
+}
+
+
 </script>
