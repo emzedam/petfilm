@@ -29,6 +29,42 @@ export const usePetfilmStore = defineStore('petfilmStore', {
           "message": error.message || 'Failed to fetch data'
         }
       }
+    },
+
+    async doRegisterUser(data) {
+      try {
+        const response = await api.post('/users/register' , data);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        return {
+          "status": error.response.status,
+          "message": error.response.data.message
+        }
+      }
+    },
+    async doLoginUser(data) {
+      try {
+        const response = await api.get(`/users/send-otp?channel=Phone&receiver=${data.phone_number}`);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.message
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
     }
   },
 });

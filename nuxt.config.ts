@@ -24,6 +24,9 @@ export default defineNuxtConfig({
       require('vite-svg-loader')()
     ]
   },
+  plugins: [
+    '~/plugins/toast.client.ts'
+  ],
   app: {
     head: {
       charset: 'utf-8',
