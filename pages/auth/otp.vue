@@ -8,6 +8,9 @@ import SideCover from '@/components/authorization/SideCover.vue'
 import Otp from '@/components/authorization/Otp.vue'
 
 definePageMeta({
-    layout: "authorization"
+    layout: "authorization",
+    middleware: 'otp-page-middleware'
 })
+
+
 </script>

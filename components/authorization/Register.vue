@@ -8,13 +8,12 @@
             </a>
         </div>
         <div class="flex items-center justify-center lg:mt-20 md:mt-32 mt-20">
-             <PetomanLogo />   
+             <PetomanLogo class="!w-[180px]" />   
         </div>
         <div class="pt-5 flex items-center justify-center">
             <h3 class="text-stone-800 dark:text-white py-3">ایجاد حساب کاربری</h3>
         </div>
         <div class=" flex items-center justify-center">
-
             <span class="text-sm dark:text-stone-300"> 
                 اطلاعات خواسته شده  را وارد کنید
             </span>

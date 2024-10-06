@@ -7,7 +7,7 @@
                 </button>
             </a>        </div>
         <div class="flex items-center justify-center lg:mt-20 md:mt-32 mt-20">
-            <PetomanLogo />  
+            <PetomanLogo class="!w-[180px]" />  
         </div>
         <div class="pt-5 flex items-center justify-center">
             <h3 class="text-stone-800 dark:text-white py-3">ورود به حساب کاربری</h3>
@@ -56,7 +56,7 @@ const router = useRouter()
 const loading = ref(false)
 const nuxtApp = useNuxtApp()
 const { $validatePhoneNumber } = nuxtApp;
-const userMobile = useCookie('user_login')
+const userMobile = useCookie('_urequest')
 const store = usePetfilmStore()
 
 const loginData = reactive({
@@ -85,16 +85,16 @@ const doLogin = async () => {
     loading.value = false
 
     if(loginResult.status == 200) {
-        // nuxtApp.$toast.open({
-        //     message: loginResult.data.message,
-        //     type: "success"
-        // })
+        nuxtApp.$toast.open({
+            message: `کد تایید به شماره موبایل ${loginResult.data.receiver} ارسال شد`,
+            type: "success"
+        })
 
         console.log(loginResult.data)
 
         userMobile.value = JSON.stringify(loginResult.data)
 
-        // router.push("/auth/otp")
+        router.push("/auth/otp")
     } else {
         nuxtApp.$toast.open({
             message: loginResult.message,
