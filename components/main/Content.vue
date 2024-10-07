@@ -111,7 +111,7 @@ const appBaseUrl = config.public.appBaseUrl;
 
 const props = defineProps({
     initData: {
-        required: true,
+        required: false,
         type: [Array , Object]
     }
 })

@@ -4,7 +4,8 @@ import api from '@/axios/index';
 export const usePetfilmStore = defineStore('petfilmStore', {
   state: () => ({
     counter: 1,
-    theme: "dark"
+    theme: "dark",
+    authUser: null
   }),
   actions: {
     increment() {
@@ -65,6 +66,33 @@ export const usePetfilmStore = defineStore('petfilmStore', {
           }
         }
       }
+    },
+    async verifyOtpRequest(data) {
+      try {
+        const response = await api.post(`/users/verify-otp` , data);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.message
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
+    setAuthUser(user) {
+      this.authUser = user
+    },
+    clearAuthUser() {
+      this.authUser = null
     }
   },
 });

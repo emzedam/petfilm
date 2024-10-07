@@ -8,6 +8,7 @@ import SideCover from '@/components/authorization/SideCover.vue'
 import Register from '@/components/authorization/Register.vue'
 
 definePageMeta({
-    layout: "authorization"
+    layout: "authorization",
+    middleware: 'auth-pages'
 })
 </script>

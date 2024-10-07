@@ -27,10 +27,7 @@ onMounted(async () => {
 const initializeData = async () => {
     const result = await petfilmStore.get_initializ_data()
     if(result.status == 200){
-        // console.log(result.data)
         initData.value = result.data
-    }else {
-        // console.log(result.message)
     }
 }
 

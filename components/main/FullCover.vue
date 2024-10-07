@@ -28,7 +28,7 @@
                     <div class="flex items-center justify-start">
                         <div class="flex items-center justify-center gap-3">
                             <p class="text-white ">persian</p>
-                            <IrnIcon />
+                            <IranIcon />
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@ const appBaseUrl = config.public.appBaseUrl
 
 const props = defineProps({
     initData: {
-        required: true,
+        required: false,
         type: [Array , Object]
     }
 })

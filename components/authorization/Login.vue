@@ -21,7 +21,7 @@
                 <input 
                 @input="validatePhoneNumber"
                 v-model="loginData.phone_number" 
-                class="w-full p-4 pl-32 dark:bg-stone-800 rounded-xl dark:text-white" type="email" placeholder="شماره موبایل">
+                class="w-full p-4 pl-32 dark:bg-stone-800 rounded-xl dark:text-white" type="text" placeholder="شماره موبایل">
  
                 <div class="absolute top-3 left-2">
                     <Phone  />
@@ -56,7 +56,7 @@ const router = useRouter()
 const loading = ref(false)
 const nuxtApp = useNuxtApp()
 const { $validatePhoneNumber } = nuxtApp;
-const userMobile = useCookie('_urequest')
+const userOtpRequest = useCookie('_urequest')
 const store = usePetfilmStore()
 
 const loginData = reactive({
@@ -82,20 +82,19 @@ const doLogin = async () => {
     loading.value = true
     const loginResult = await store.doLoginUser(loginData)
 
-    loading.value = false
-
+    
     if(loginResult.status == 200) {
+        loading.value = false
         nuxtApp.$toast.open({
             message: `کد تایید به شماره موبایل ${loginResult.data.receiver} ارسال شد`,
             type: "success"
         })
 
-        console.log(loginResult.data)
-
-        userMobile.value = JSON.stringify(loginResult.data)
+        userOtpRequest.value = JSON.stringify(loginResult.data)
 
         router.push("/auth/otp")
     } else {
+        loading.value = false
         nuxtApp.$toast.open({
             message: loginResult.message,
             type: "error"

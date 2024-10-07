@@ -39,7 +39,7 @@ import {defineProps} from 'vue'
 
 const props = defineProps({
     initData: {
-        required: true,
+        required: false,
         type: [Array , Object]
     }
 })

@@ -51,20 +51,39 @@
                     <SunIcon v-if="theme == 'dark'" />
                     <MoonIcon v-if="theme == 'light'"  />
                 </div> -->
-                <div>
+                <div v-if="!authUser">
                     <button class="p-2 mx-3 bg-yellow-500 rounded-lg">
                         <nuxt-link class="flex" to="/auth/login">
                           <UserIcon/>  ورود/ عضویت </nuxt-link> </button>
+                </div>
+                <div v-else>
+                    <button  @click="showConfirmModal = true" class="p-2 mx-3 bg-yellow-500 rounded-lg">
+                        <a class="flex" href="javascript:void(0)">
+                          <UserIcon/>{{ authUser.first_name }} {{ authUser.last_name }}</a> </button>
                 </div>
             </div>
 
 
         </div>
 
+
+        <ConfirmModal
+            :isVisible="showConfirmModal"
+            @confirm="handleConfirm"
+            @cancel="handleCancel"
+        >
+        <template #title>
+            Delete Item
+        </template>
+        <template #message>
+            Are you sure you want to delete this item?
+        </template>
+        </ConfirmModal>
     </header>
 </template>
 
 <script setup> 
+import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 import {useRoute , useRouter} from 'vue-router'
 import SunIcon from '~/assets/icons/svg/duelTone/sun.svg'
 import MoonIcon from '~/assets/icons/svg/duelTone/moon.svg'
@@ -73,9 +92,10 @@ import {usePetfilmStore} from '@/store/petfilmStore.js'
 import {storeToRefs} from 'pinia'
 
 const store = usePetfilmStore()
-const {theme} = storeToRefs(store)
+const {theme , authUser} = storeToRefs(store)
 const router = useRouter()
 const search_query_param = ref(null)
+const showConfirmModal = ref(false)
 
 const do_search_content = () => {
     if(search_query_param.value != null) {
@@ -87,5 +107,14 @@ const changeThemeMode = () => {
     store.change_theme_mode()
 }
 
+const handleConfirm = () => {
+  showConfirmModal.value = false
+  alert('Confirmed!')
+}
+
+const handleCancel = () => {
+  showConfirmModal.value = false
+  alert('Cancelled!')
+}
 
 </script>
