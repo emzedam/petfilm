@@ -88,6 +88,77 @@ export const usePetfilmStore = defineStore('petfilmStore', {
         }
       }
     },
+    async logout_user(data) {
+      try {
+        const response = await api.post(`/users/logout` , {
+          refresh: data.refresh
+        } , {
+          headers: {
+            Authorization: `Bearer ${data.token}`
+          }
+        });
+
+        this.authUser = null
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.message
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
+    async get_category_detail(data) {
+      try {
+        const response = await api.get(`/categories/${data.id}/`);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.detail
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
+    async do_search_movie(data) {
+      try {
+        const response = await api.get(`/videos?search=${data.qstring}`);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.message
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
     setAuthUser(user) {
       this.authUser = user
     },

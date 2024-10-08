@@ -60,8 +60,14 @@ const showResendButton = ref(false)
 const resendLoading = ref(false)
 let countdownInterval
 const otp_code = ref(null)
-const refresh = useCookie("refresh")
-const token = useCookie("token")
+
+const refresh = useCookie("refresh", {
+  maxAge: 60 * 60 * 24 * 14
+})
+
+const token = useCookie("token" , {
+  maxAge: 60 * 60 * 24 * 7 
+})
 
 const codeCompleted = (code) => {
     otp_code.value = code
@@ -89,6 +95,8 @@ const doVerify = async (code=null) => {
 
             refresh.value = result.data.refresh
             token.value = result.data.token
+
+            loginRequestInfo.value = null
 
             router.push("/")
         }else {

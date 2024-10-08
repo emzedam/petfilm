@@ -73,10 +73,10 @@
             @cancel="handleCancel"
         >
         <template #title>
-            Delete Item
+            خروج از حساب
         </template>
         <template #message>
-            Are you sure you want to delete this item?
+            آیا از خروج حساب کاربری خود مطمعن هستید؟
         </template>
         </ConfirmModal>
     </header>
@@ -91,6 +91,7 @@ import UserIcon from '~/assets/icons/svg/duelTone/user.svg'
 import {usePetfilmStore} from '@/store/petfilmStore.js'
 import {storeToRefs} from 'pinia'
 
+const nuxtApp = useNuxtApp()
 const store = usePetfilmStore()
 const {theme , authUser} = storeToRefs(store)
 const router = useRouter()
@@ -107,14 +108,37 @@ const changeThemeMode = () => {
     store.change_theme_mode()
 }
 
-const handleConfirm = () => {
-  showConfirmModal.value = false
-  alert('Confirmed!')
+const handleConfirm = async () => {
+    const refresh = useCookie("refresh")
+    const token = useCookie("token")
+    if(refresh.value && token.value) {
+        const payload = {
+            token: token.value,
+            refresh: refresh.value
+        }
+        const logoutResult = await store.logout_user(payload)
+        if(logoutResult.status == 205) {
+            showConfirmModal.value = false
+            nuxtApp.$toast.open({
+                message: logoutResult.data.message,
+                type: "success"
+            })
+            refresh.value = null
+            token.value = null
+        }else {
+            showConfirmModal.value = false
+            nuxtApp.$toast.open({
+                message: logoutResult.message,
+                type: "error"
+            })
+        }
+    }else {
+        window.location.reload()
+    }
 }
 
 const handleCancel = () => {
   showConfirmModal.value = false
-  alert('Cancelled!')
 }
 
 </script>

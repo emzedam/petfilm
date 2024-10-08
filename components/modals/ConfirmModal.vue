@@ -1,29 +1,29 @@
 <template>
-    <div v-if="isVisible" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+    <div v-if="isVisible"  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 !z-[2000]">
+      <div  class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg max-w-md w-full">
         <!-- Title Slot -->
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">
-          <slot name="title">Are you sure?</slot>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">
+          <slot name="title">آیا مطمعنید؟</slot>
         </h3>
   
         <!-- Message Slot -->
-        <div class="mb-6">
-          <slot name="message">Do you want to proceed with this action?</slot>
+        <div class="mb-6 dark:text-white">
+          <slot name="message">آیا از انجام این اقدام مطمعن هستید؟</slot>
         </div>
   
         <!-- Actions: Confirm and Cancel buttons -->
-        <div class="flex justify-end space-x-4">
+        <div class="flex justify-end gap-2">
           <button
             @click="cancel"
             class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
           >
-            Cancel
+            لغو
           </button>
           <button
             @click="confirm"
-            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            class="px-4 py-2 bg-blue-600 dark:bg-yellow-500 dark:text-black text-white rounded hover:bg-blue-700 dark:hover:bg-yellow-700"
           >
-            Confirm
+            تایید
           </button>
         </div>
       </div>
