@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section v-if="movieDetail != null">
         <div class=" relative overflow-hidden">
             <div class="w-full">
                 <div class=" relative overflow-hidden h-96">
@@ -8,35 +8,60 @@
                     </div>
 
 
-                    <img class=" w-full object-cover -mt-32 h-screen"
-                        src="https://static-s.sheyda.com/3479dce676464486b55b54d5285f2020.jpeg?imgProcess=f:webp/w:1920">
+                    <img class="w-full object-cover -mt-32 h-screen blur-lg"
+                        :src="`${movieDetail.cover}`">
 
 
                     <div class="mx-auto max-w-7xl">
                         <div class="absolute top-32 z-30">
                             <div class="text text-white space-y-5 px-4 py-4">
                                 
-                                <h3 class="lg:text-3xl text-xl">فیلم خشم هیاهو, فیلمی متفاوت و هیجان</h3>
-                                <h2 class="lg:text-xl text-sm text-stone-800 dark:text-slate-200 font-semibold">Alien: Romulus 2024</h2>
-                                <p class="text-stone-700 dark:text-white font-semibold">در مورد بابی فالز، یک قاتل زنجیره‌ای 19 ساله است که در سال 1964 میلادی با جیم گودوین،
-                                    یک نگهدارنده حیوانات مشهور که با محموله گرانبهای خود سفر می‌کند، همراه می‌شود و ...
-                                </p>
+                                <h3 class="lg:text-3xl text-xl">{{ movieDetail.title_fa }}</h3>
+                                <h2 class="lg:text-xl text-sm text-stone-800 dark:text-slate-200 font-semibold">{{ movieDetail.title_en }}</h2>
+                                <div v-html="movieDetail.description"></div>
                             </div>
 
-                            <div class="gap-4">
+                            <nuxt-link :to="`/archive/${movieDetail.category.slug}-${movieDetail.category.id}`" class="gap-4">
                                 <button
-                                    class="backdrop-brightness-200 px-4 py-2 rounded-xl dark:text-white text-stone-600 text-sm">درام</button>
-                                <button
-                                    class="backdrop-brightness-200 px-4 py-2 rounded-xl  dark:text-white text-stone-600 text-sm">کمدی</button>
-                                <button
-                                    class="backdrop-brightness-200 px-4 py-2 rounded-xl  dark:text-white text-stone-600 text-sm">ترسناک</button>
-                                <button
-                                    class="backdrop-brightness-200 px-4 py-2 rounded-xl  dark:text-white text-stone-600 text-sm">خانوادگی</button>
-                            </div>
+                                    class="backdrop-brightness-200 px-4 py-2 rounded-xl dark:text-white text-stone-600 text-sm">{{ movieDetail.category.title }}</button>
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <section v-else>
+        <div class="relative overflow-hidden">
+          <div class="w-full">
+            <div class="relative overflow-hidden h-96 bg-gray-300 dark:bg-slate-800 animate-pulse"></div>
+    
+            <div class="mx-auto max-w-7xl">
+              <div class="absolute top-32 z-30">
+                <div class="text space-y-5 px-4 py-4">
+                  <div class="h-8 bg-gray-300 dark:bg-slate-900 rounded w-3/4 animate-pulse"></div>
+                  <div class="h-4 bg-gray-300 dark:bg-slate-900 rounded w-1/2 animate-pulse"></div>
+                  <div class="h-4 bg-gray-300 dark:bg-slate-900 rounded w-full animate-pulse"></div>
+                </div>
+    
+                <div class="gap-4">
+                  <button class="backdrop-brightness-200 px-4 py-2 rounded-xl bg-gray-300 dark:bg-slate-900 w-24 h-10 animate-pulse"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 </template>
+
+<script setup>
+const config = useRuntimeConfig();
+
+const appBaseUrl = config.public.appBaseUrl;
+const props = defineProps({
+    movieDetail: {
+        required: false,
+        type: [Array , Object]
+    }
+})
+</script>

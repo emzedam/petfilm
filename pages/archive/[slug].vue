@@ -31,7 +31,6 @@ const getCategoryDetail = async () => {
 
   if(result.status == 200) {
     categoryInfo.value = result.data
-    console.log(categoryInfo.value)
   }
 }
 

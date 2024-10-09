@@ -159,6 +159,27 @@ export const usePetfilmStore = defineStore('petfilmStore', {
         }
       }
     },
+    async get_movie_detail(data) {
+      try {
+        const response = await api.get(`/videos/${data.id}/`);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.detail
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
     setAuthUser(user) {
       this.authUser = user
     },

@@ -44,6 +44,12 @@ export default defineNuxtConfig({
       },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/petomanfavicon.png' }
+      ],
+      script: [
+        {
+          type: "text/javascript",
+          src: "/js/jwplayer.js"
+        }
       ]
     }
   }

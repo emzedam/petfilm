@@ -1,14 +1,12 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    // چک کردن اینکه آیا اسلاگ در مسیر وجود دارد یا خیر
-    const slug = to.params.slug
-    
-    // تعریف regex برای ولیدیت کردن اسلاگ
-    const slugPattern = /^[a-zA-Zآ-ی-]+-\d+$/
-    console.log(slugPattern.test(slug))
+  // گرفتن اسلاگ از مسیر
+  const slug = to.params.slug
   
-    // اگر اسلاگ موجود نبود یا با regex مطابقت نداشت، ریدایرکت به صفحه اصلی
-    if (!slug || !slugPattern.test(slug)) {
-      return navigateTo('/')
-    }
-  })
-  
+  // تعریف regex برای ولیدیت کردن اسلاگ با پشتیبانی از ساختار پیچیده‌تر
+  const slugPattern = /^[a-zA-Zآ-ی0-9-]+-\d+$/
+
+  // بررسی صحت اسلاگ و ریدایرکت به صفحه اصلی در صورت نامعتبر بودن
+  if (!slug || !slugPattern.test(slug)) {
+    return navigateTo('/')
+  }
+})

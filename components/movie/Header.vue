@@ -3,7 +3,7 @@
         <header class="fixed z-20 py-6 w-full inset-x-0 mx-auto px-6">
             <!-- Gradient Background -->
             <div
-                class="absolute top-0 inset-x-0 w-full h-28 bg-gradient-to-b  from-stone-800/10 via-stone-800/50 to-stone/0 z-10">
+                class="absolute top-0 inset-x-0 w-full h-28 bg-gradient-to-b  from-stone-800/10 via-stone-800/50 to-stone/0 z-10 hidden">
             </div>
     
             <div class="relative flex items-center justify-between">
