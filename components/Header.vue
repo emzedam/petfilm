@@ -15,7 +15,7 @@
                             class="dark:text-white text-start relative border p-3 border-stone-200 dark:border-stone-800 rounded-xl pl-32 dark:bg-stone-950"
                             type="text" placeholder="شروع به جستجو کنید">
                         <div class="absolute top-3 left-1 px-2">
-                            <a href="./jostojo.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#57534e"
+                            <a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#57534e"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="icon icon-tabler icons-tabler-outline icon-tabler-zoom">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -28,7 +28,7 @@
                 </form>
             </div>
 
-            <div class="jostojo flex items-center justify-center lg:px-2 lg:hidden">
+            <div class="jostojo flex items-center justify-center lg:px-2 lg:hidden" @click="openMobileMenu">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -51,6 +51,9 @@
                     <SunIcon v-if="theme == 'dark'" />
                     <MoonIcon v-if="theme == 'light'"  />
                 </div> -->
+                <button class="backdrop-blur-md  rounded-xl bg-stone-700 block lg:hidden">
+                    <nuxt-link to="/search?query_string="><svg  xmlns="http://www.w3.org/2000/svg"  width="40"  height="40"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search backdrop-blur-sm bg-black/10 p-2 rounded-xl"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg></nuxt-link>
+                </button>
                 <div v-if="!authUser">
                     <button class="p-2 mx-3 bg-yellow-500 rounded-lg">
                         <nuxt-link class="flex" to="/auth/login">
@@ -66,6 +69,8 @@
 
         </div>
 
+        
+
 
         <ConfirmModal
             :isVisible="showConfirmModal"
@@ -80,9 +85,12 @@
         </template>
         </ConfirmModal>
     </header>
+
+    
 </template>
 
 <script setup> 
+
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 import {useRoute , useRouter} from 'vue-router'
 import SunIcon from '~/assets/icons/svg/duelTone/sun.svg'
@@ -90,6 +98,8 @@ import MoonIcon from '~/assets/icons/svg/duelTone/moon.svg'
 import UserIcon from '~/assets/icons/svg/duelTone/user.svg'
 import {usePetfilmStore} from '@/store/petfilmStore.js'
 import {storeToRefs} from 'pinia'
+
+const emit = defineEmits(['openMobileMenu'])
 
 const nuxtApp = useNuxtApp()
 const store = usePetfilmStore()
@@ -135,6 +145,10 @@ const handleConfirm = async () => {
     }else {
         window.location.reload()
     }
+}
+
+const openMobileMenu = () => {
+    emit("openMobileMenu")
 }
 
 const handleCancel = () => {

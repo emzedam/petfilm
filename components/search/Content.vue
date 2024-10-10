@@ -2,9 +2,29 @@
     <main>
         <section>
             
+            <div class="jostojo items-center justify-center px-2 w-full mt-[40px] block lg:hidden">
+                <form @submit.prevent="forward_to_searchpage">
+                    <div class="relative w-full">
+                        <input
+                            v-model="search_query_param"
+                            class="dark:text-white w-full text-start relative border p-2 border-stone-200 dark:border-stone-800 rounded-xl dark:bg-stone-950"
+                            type="text" placeholder="شروع به جستجو کنید">
+                        <div class="absolute top-3 left-1 px-2">
+                            <a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#57534e"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-zoom">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                <path d="M21 21l-6 -6" />
+                            </svg></a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
 
             <article>
-                <div class="absolute top-[120px] lg:px-6 px-2 dark:text-white lg:text-xl font-semibold py-3">
+                <div class="absolute top-[150px] lg:top-[120px] lg:px-6 px-2 dark:text-white lg:text-xl font-semibold py-3">
                     <h3 class="text-yellow-500">عنوانی که شما جستجو کردید : {{ search_query_param }}</h3>
                 </div>
             </article>
@@ -75,6 +95,8 @@
 import {useRoute , useRouter} from 'vue-router'
 import {watch , onMounted} from 'vue'
 import {usePetfilmStore} from '@/store/petfilmStore.js'
+import StarIcon from '@/assets/icons/svg/duelTone/star.svg'
+import PlusIcon from '@/assets/icons/svg/duelTone/plus.svg'
 
 const route = useRoute()
 const router = useRouter()

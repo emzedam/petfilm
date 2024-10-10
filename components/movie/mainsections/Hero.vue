@@ -21,7 +21,7 @@
                                 <div v-html="movieDetail.description"></div>
                             </div>
 
-                            <nuxt-link :to="`/archive/${movieDetail.category.slug}-${movieDetail.category.id}`" class="gap-4">
+                            <nuxt-link :to="`/archive/${movieDetail.category.slug}-${movieDetail.category.id}`" class="gap-4 px-2">
                                 <button
                                     class="backdrop-brightness-200 px-4 py-2 rounded-xl dark:text-white text-stone-600 text-sm">{{ movieDetail.category.title }}</button>
                             </nuxt-link>
@@ -44,7 +44,7 @@
                   <div class="h-4 bg-gray-300 dark:bg-slate-900 rounded w-full animate-pulse"></div>
                 </div>
     
-                <div class="gap-4">
+                <div class="gap-4 px-2">
                   <button class="backdrop-brightness-200 px-4 py-2 rounded-xl bg-gray-300 dark:bg-slate-900 w-24 h-10 animate-pulse"></button>
                 </div>
               </div>

@@ -3,7 +3,7 @@
   <div class="w-full mx-auto max-w-[1280px]">
     <section>
       <!-- اصلی: نمایش اطلاعات وقتی که movieDetail بارگذاری شده -->
-      <div v-if="movieDetail != null" class="grid grid-cols-1 lg:grid-cols-5 lg:gap-y-4 gap-4 mt-8">
+      <div v-if="movieDetail != null" class="grid grid-cols-1 lg:grid-cols-5 lg:gap-y-4 gap-4 mt-8 px-3">
         <div
           @click="showModal()"
           class="flex cursor-pointer items-center justify-center dark:bg-black/80 bg-slate-200 rounded-xl text-white hover:bg-yellow-500 hover:text-white transition-all duration-300 opacity-100 p-5">
@@ -23,7 +23,7 @@
       </div>
 
       <!-- اسکلت لودینگ: زمانی که movieDetail هنوز بارگذاری نشده -->
-      <div v-else class="grid grid-cols-1 lg:grid-cols-5 lg:gap-y-4 gap-4 mt-8">
+      <div v-else class="grid grid-cols-1 lg:grid-cols-5 lg:gap-y-4 gap-4 mt-8 px-3">
         <div class="flex items-center justify-center dark:bg-slate-800 bg-slate-200 rounded-xl animate-pulse p-5">
           <div class="w-12 h-12 bg-gray-300 dark:bg-slate-900 rounded-full"></div>
           <span class="text-lg ml-2 bg-gray-300 dark:bg-slate-900 w-20 h-6 rounded"></span>

@@ -38,7 +38,6 @@ const getMovieDetail = async () => {
 
   if(result.status == 200) {
     movieDetail.value = result.data
-    console.log(movieDetail.value)
   }
 }
 

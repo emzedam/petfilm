@@ -11,8 +11,8 @@
                     </div>
                 </div>
                 <div class="absolute lg:bottom-6 lg:right-9 bottom-36 px-5">
-                    <button
-                        class="bg-yellow-500 duration-500 px-6 py-2 rounded-lg hover:bg-yellow-300">مشاهده</button>
+                    <nuxt-link :to="`/movie/${initData.cover_video[0].slug}-${initData.cover_video[0].id}`"
+                        class="bg-yellow-500 duration-500 px-6 py-2 rounded-lg hover:bg-yellow-300">مشاهده</nuxt-link>
                 </div>
 
                 <div class="absolute lg:right-16 top-16 lg:top-32 right-9 text-right space-y-3">

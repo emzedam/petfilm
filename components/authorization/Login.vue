@@ -1,5 +1,5 @@
 <template>
-    <div class=" lg:col-span-4 col-span-12 dark:bg-stone-900  w-full h-full">
+    <div class=" lg:col-span-4 col-span-12 dark:bg-stone-900  w-full h-[100vh]">
         <div class=" flex items-center justify-end p-6">
             <a @click="$router.back()" href="javascript:void(0)" >
                 <button class="p-2 bg-yellow-500 rounded-lg">

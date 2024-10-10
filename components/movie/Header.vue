@@ -38,38 +38,35 @@
                 </div>
     
                 <!-- Desktop Buttons -->
-                <div class="lg:flex items-center justify-end gap-3 hidden z-20">
-                    <button class="">
-                        
-                        <nuxt-link to="/search?query_string="><svg  xmlns="http://www.w3.org/2000/svg"  width="44"  height="44"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search backdrop-blur-sm bg-black/10 p-2 rounded-xl"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg></nuxt-link>
-                    </button>
-                    <div v-if="!authUser">
-                        <button class="p-2 mx-3 bg-yellow-500 rounded-lg">
-                            <nuxt-link class="flex" to="/auth/login">
-                              <UserIcon/>  ورود/ عضویت </nuxt-link> </button>
-                    </div>
-                    <div v-else>
-                        <button  @click="showConfirmModal = true" class="p-2 mx-3 bg-yellow-500 rounded-lg">
-                            <a class="flex" href="javascript:void(0)">
-                              <UserIcon/>{{ authUser.first_name }} {{ authUser.last_name }}</a> </button>
-                    </div>
-                    
-                </div>
-    
-                <!-- Mobile Buttons -->
-                <div class="lg:hidden flex items-center justify-end gap-1 z-20">
-                    <button class="backdrop-blur-xl p-2 rounded-xl bg-stone-700">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-crown"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z" /></svg>
-                    </button>
-                    <button class="backdrop-blur-md p-2 rounded-xl bg-stone-700">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#fff"  class="icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg>
-                    </button>
-                    <button class="backdrop-blur-md p-2 rounded-xl bg-stone-700">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
-                    </button>
-                </div>
+                 <div class="flex">
+                     <div class="lg:flex items-center justify-end gap-3 z-20">
+                         <button class="hidden lg:block">
+                             <nuxt-link to="/search?query_string="><svg  xmlns="http://www.w3.org/2000/svg"  width="44"  height="44"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search backdrop-blur-sm bg-black/10 p-2 rounded-xl"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg></nuxt-link>
+                         </button>
+                         <div v-if="!authUser">
+                             <button class="p-2 mx-3 bg-yellow-500 rounded-lg">
+                                 <nuxt-link class="flex" to="/auth/login">
+                                   <UserIcon/>  ورود </nuxt-link> </button>
+                         </div>
+                         <div v-else>
+                             <button  @click="showConfirmModal = true" class="p-2 mx-3 bg-yellow-500 rounded-lg">
+                                 <a class="flex" href="javascript:void(0)">
+                                   <UserIcon/>{{ authUser.first_name }} {{ authUser.last_name }}</a> </button>
+                         </div>
+                         
+                     </div>
+         
+                     <!-- Mobile Buttons -->
+                     <div class="lg:hidden flex items-center justify-end gap-1 z-20">
+                         <button class="backdrop-blur-md  rounded-xl bg-stone-700">
+                             <nuxt-link to="/search?query_string="><svg  xmlns="http://www.w3.org/2000/svg"  width="40"  height="40"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search backdrop-blur-sm bg-black/10 p-2 rounded-xl"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg></nuxt-link>
+                         </button>
+                         <button @click="openMobileMenu" class="backdrop-blur-md p-2 rounded-xl bg-stone-700">
+                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#fff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+                         </button>
+                     </div>
+                 </div>
             </div>
-    
             
         </header>
         <ConfirmModal
@@ -93,6 +90,8 @@ import UserIcon from '~/assets/icons/svg/duelTone/user.svg'
 import {usePetfilmStore} from '@/store/petfilmStore.js'
 import {storeToRefs} from 'pinia'
 
+
+const emit = defineEmits(['openMobileMenu'])
 const store = usePetfilmStore()
 const {authUser} = storeToRefs(store)
 const nuxtApp = useNuxtApp()
@@ -129,6 +128,10 @@ const handleConfirm = async () => {
 
 const handleCancel = () => {
   showConfirmModal.value = false
+}
+
+const openMobileMenu = () => {
+    emit("openMobileMenu")
 }
 </script>
 
