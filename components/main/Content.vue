@@ -48,8 +48,10 @@
                 
                                 <div class="absolute  w-full bg-gradient-to-t from-stone-900/100 via-stone-950/70 to-stone-950/0  rounded-b-lg shadow-2xl p-3 bottom-0">
                                     <h3 class="text-white truncate font-bold">{{ video.title_fa }}</h3>
-                                    <p class="text-stone-300 py-1 truncate">{{ video.titlt_en }}</p>
-                                    <button class="bg-yellow-500 flex p-2 rounded-lg text-white"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#fff"  class="icon icon-tabler icons-tabler-filled icon-tabler-player-play"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" /></svg> تماشا</button>
+                                    <p class="text-stone-300 py-1 truncate">{{ video.title_en }}</p>
+                                    <nuxt-link :to="`/movie/${video.slug}-${video.id}`">
+                                        <button :to="`/movie/${video.slug}-${video.id}`" class="bg-yellow-500 flex p-2 rounded-lg text-white"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#fff"  class="icon icon-tabler icons-tabler-filled icon-tabler-player-play"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" /></svg> تماشا</button>
+                                    </nuxt-link>
                                 </div>
                                 <div class="absolute top-3 right-2 z-50 backdrop-blur-md p-2 rounded-lg justify-between">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFF"

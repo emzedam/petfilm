@@ -108,6 +108,7 @@ const doRegister = async () => {
     }
 
     loading.value = true
+    registerData.username = registerData.phone_number
     const registerResult = await store.doRegisterUser(registerData)
 
     loading.value = false

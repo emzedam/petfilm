@@ -9,7 +9,7 @@ import Otp from '@/components/authorization/Otp.vue'
 
 definePageMeta({
     layout: "authorization",
-    middleware: ['otp-page-middleware' , 'auth-pages']
+    middleware: ['otp-page-middleware' , 'guest-pages']
 })
 
 

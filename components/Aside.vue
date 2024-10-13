@@ -23,53 +23,32 @@
 
                 <div>
 
-                    <div class="group">
+                    <div class="group my-1">
                         <nuxt-link to="/"
-                            class="flex items-center justify-start duration-500 bg-yellow-500 px-2 py-3 rounded-lg cursor-pointer">
-                            <Emoji />
-                            <p class="text-black font-bold px-3">مرور کنید</p>
+                            class="flex items-center justify-start hover:bg-yellow-500 duration-500  px-2 py-3 rounded-lg cursor-pointer" :class="$route.path == '/' ? 'bg-yellow-500' : ''">
+                            <Emoji width="24" height="24" class="group-hover:stroke-black " :class="$route.path == '/' ? '' : 'dark:stroke-white'" />
+                            <p class=" dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3" :class="$route.path == '/' ? 'dark:text-black' : 'dark:text-white'">مرور کنید</p>
                         </nuxt-link>
                     </div>
-                    <div class="group">
-                        <div
-                            class="flex items-center justify-start duration-500 hover:bg-yellow-500 px-2 py-3 my-1 rounded-lg cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-antenna-bars-5 group-hover:stroke-black dark:stroke-white ">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M6 18l0 -3" />
-                                <path d="M10 18l0 -6" />
-                                <path d="M14 18l0 -9" />
-                                <path d="M18 18l0 -12" />
-                            </svg>
-                            <p class="dark:text-white dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3">
-                                علاقه مندی ها </p>
-                        </div>
+                    <div class="group my-1" v-if="authUser">
+                        <nuxt-link to="/favorites"
+                            class="flex items-center justify-start hover:bg-yellow-500 duration-500  px-2 py-3 rounded-lg cursor-pointer" :class="$route.path == '/favorites' ? 'bg-yellow-500' : ''">
+                            <Heart width="24" height="24" class="group-hover:stroke-black " :class="$route.path == '/favorites' ? '' : 'dark:stroke-white'" />
+                            <p class=" dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3" :class="$route.path == '/favorites' ? 'dark:text-black' : 'dark:text-white'">علاقه مندی ها </p>
+                        </nuxt-link>
                     </div>
-                    <div class="group">
+                    <div class="group my-1">
                         <nuxt-link to="/aboutus"
-                            class="flex items-center justify-start duration-500 hover:bg-yellow-500 px-2 py-3 my-1 rounded-lg cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-antenna-bars-5 group-hover:stroke-black dark:stroke-white ">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M6 18l0 -3" />
-                                <path d="M10 18l0 -6" />
-                                <path d="M14 18l0 -9" />
-                                <path d="M18 18l0 -12" />
-                            </svg>
-                            <p class="dark:text-white dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3">
-                               درباره ما</p>
+                            class="flex items-center justify-start hover:bg-yellow-500 duration-500  px-2 py-3 rounded-lg cursor-pointer" :class="$route.path == '/aboutus' ? 'bg-yellow-500' : ''">
+                            <CircleInfo width="24" height="24" class="group-hover:stroke-black " :class="$route.path == '/aboutus' ? '' : 'dark:stroke-white'" />
+                            <p class=" dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3" :class="$route.path == '/aboutus' ? 'dark:text-black' : 'dark:text-white'"> درباره ما</p>
                         </nuxt-link>
                     </div>
-                    <div class="group">
+                    <div class="group my-1">
                         <nuxt-link to="/contactus"
-                            class="flex items-center justify-start duration-500 hover:bg-yellow-500 px-2 py-3 my-1 rounded-lg cursor-pointer">
-                            <Phone class="dark:text-white" />
-                            <p class="dark:text-white dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3">
-                                تماس با ما</p>
+                            class="flex items-center justify-start hover:bg-yellow-500 duration-500  px-2 py-3 rounded-lg cursor-pointer" :class="$route.path == '/contactus' ? 'bg-yellow-500' : ''">
+                            <Phone width="24" height="24" class="group-hover:stroke-black " :class="$route.path == '/contactus' ? '' : 'dark:stroke-white'" />
+                            <p class=" dark:stroke-black stroke-black group-hover:font-bold group-hover:text-black px-3" :class="$route.path == '/contactus' ? 'dark:text-black' : 'dark:text-white'">تماس با ما</p>
                         </nuxt-link>
                     </div>
 
@@ -84,7 +63,14 @@
 
 <script setup>
 import Emoji from '@/assets/icons/svg/duelTone/emoji.svg'
+import Heart from '@/assets/icons/svg/duelTone/heart-check.svg'
 import Phone from '@/assets/icons/svg/duelTone/phone.svg'
+import CircleInfo from '@/assets/icons/svg/duelTone/info-circle.svg'
+import {usePetfilmStore} from '@/store/petfilmStore.js'
+import {storeToRefs} from 'pinia'
+
+const store = usePetfilmStore()
+const {authUser} = storeToRefs(store)
 </script>
 
 <style scoped>

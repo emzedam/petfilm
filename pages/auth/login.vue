@@ -9,6 +9,6 @@ import Login from '@/components/authorization/Login.vue'
 
 definePageMeta({
     layout: "authorization",
-    middleware: 'auth-pages'
+    middleware: 'guest-pages'
 })
 </script>

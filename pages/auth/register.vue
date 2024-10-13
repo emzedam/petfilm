@@ -9,6 +9,6 @@ import Register from '@/components/authorization/Register.vue'
 
 definePageMeta({
     layout: "authorization",
-    middleware: 'auth-pages'
+    middleware: 'guest-pages'
 })
 </script>

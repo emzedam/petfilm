@@ -2,8 +2,17 @@
 <template>
   <div class="w-full mx-auto max-w-[1280px]">
     <section>
-      <!-- اصلی: نمایش اطلاعات وقتی که movieDetail بارگذاری شده -->
+
       <div v-if="movieDetail != null" class="grid grid-cols-1 lg:grid-cols-5 lg:gap-y-4 gap-4 mt-8 px-3">
+        <div v-if="authUser" @click="doFavoriteAction()"
+          class="flex cursor-pointer items-center justify-center dark:bg-black/80 bg-slate-200 rounded-xl text-white hover:bg-yellow-500 hover:text-white transition-all duration-300 opacity-100 p-5">
+          <HeartMinus stroke="red" width="44"  height="44" v-if="favoriteStatus" />
+          <!-- <span class="text-lg mr-2" v-if="favoriteStatus">حدف از علاقه مندی</span> -->
+
+          <HeartCheck stroke="green" width="44"  height="44" v-if="!favoriteStatus" />
+          <!-- <span class="text-lg mr-2" v-if="!favoriteStatus">افزودن به علاقه مندی </span> -->
+        </div>
+
         <div
           @click="showModal()"
           class="flex cursor-pointer items-center justify-center dark:bg-black/80 bg-slate-200 rounded-xl text-white hover:bg-yellow-500 hover:text-white transition-all duration-300 opacity-100 p-5">
@@ -45,8 +54,20 @@
 </template>
 
 <script setup>
+import PlayerModal from '@/components/modals/PlayerModal.vue';
+import HeartMinus from '@/assets/icons/svg/duelTone/heart-minus.svg'
+import HeartCheck from '@/assets/icons/svg/duelTone/heart-check.svg'
+import {usePetfilmStore} from '@/store/petfilmStore.js'
+import {storeToRefs} from 'pinia'
+
+
+
+
+const nuxtApp = useNuxtApp()
+const store = usePetfilmStore()
+const {authUser} = storeToRefs(store) 
 const config = useRuntimeConfig();
-import PlayerModal from '@/components/modals/PlayerModal.vue'; 
+const favoriteStatus = ref(false)
 
 const  { $player } = useNuxtApp();
 
@@ -59,9 +80,9 @@ const props = defineProps({
     }
 })
 
+
 function showModal() {
     let streamType = { type: "m3u8", url: `${appBaseUrl}${props.movieDetail.hls_link}` };
-    console.log(streamType)
     $player(streamType);
     isPlayerModalVisible.value = true;
 }
@@ -70,4 +91,38 @@ const closePlayerModal = () => {
     isPlayerModalVisible.value = false
     $player().remove()
 }
+
+const doFavoriteAction = async () => {
+  if (authUser.value) {
+    const token = useCookie("token")
+    const result = await store.favorite_action({
+      video_id: props.movieDetail.id,
+      token: token.value
+    })
+    if(result.status == 200 || result.status == 201) {
+      nuxtApp.$toast.open({
+        message: result.message,
+        type: 'success'
+      })
+    }else {
+      nuxtApp.$toast.open({
+        message: result.message,
+        type: 'error'
+      })
+    }
+    
+    favoriteStatus.value = !favoriteStatus.value
+  }
+}
+
+watch(() => props.movieDetail , (newVal , oldVal) => {
+  if(authUser.value != null) {
+    const favExist = authUser.value.videos.some(item => item.id === newVal.id);
+    if(favExist) {
+      favoriteStatus.value = true
+    }else {
+      favoriteStatus.value = false
+    }
+  }
+})
 </script>
