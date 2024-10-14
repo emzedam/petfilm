@@ -208,6 +208,48 @@ export const usePetfilmStore = defineStore('petfilmStore', {
         }
       }
     },
+    async getFooterDescription() {
+      try {
+        const response = await api.get(`/footer-description/`);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.detail
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
+    async getFooterLinks() {
+      try {
+        const response = await api.get(`/footer-links/`);
+        return {
+          "status": response.status,
+          "data": response.data
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return {
+            "status": error.response.status,
+            "message": error.response.data.detail
+          }
+        } else {
+          return {
+            "status": 500,
+            "messages": 'An unknown error occurred.'
+          }
+        }
+      }
+    },
     setAuthUser(user) {
       this.authUser = user
     },

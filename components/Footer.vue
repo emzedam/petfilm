@@ -21,19 +21,17 @@
                         class="cls-1"></path>
                 </svg>
 
-                <p class="pt-6 text-stone-400 text-justify">پت دانیم یکی از پرتلاش ترین و بروزترین وبسایت های آموزشی در سطح ایران است که همیشه تلاش کرده تا بتواند جدیدترین و
-                بروزترین مقالات و دوره های آموزشی را در اختیار علاقه مندان ایرانی قرار دهد. تبدیل کردن برنامه نویسان ایرانی به بهترین
-                برنامه نویسان جهان هدف ماست.</p>
+                <p class="pt-6 text-stone-400 text-justify" v-if="description != null">
+                    {{ description }}                    
+                </p>
                 </div>
-            <div class="dark:text-white xl:col-span-2 col-span-8 lg:col-span-4 py-10  px-6 rounded-lg bg-slate-50 dark:bg-stone-900">
+            <div v-if="links.length != 0" class="dark:text-white xl:col-span-2 col-span-8 lg:col-span-4 py-10  px-6 rounded-lg bg-slate-50 dark:bg-stone-900">
                 <h3 class=" font-semibold cursor-pointer">خانواده ما</h3>
 
                 <ul class="py-3">
-                    <li class="text-sm text-stone-400 duration-500 cursor-pointer hover:text-yellow-500 py-1">حامیان پت</li>
-                    <li class="text-sm text-stone-400 duration-500 cursor-pointer hover:text-yellow-500 py-1"> پت چت</li>
-                    <li class="text-sm text-stone-400 duration-500 cursor-pointer hover:text-yellow-500 py-1">دامپزشکی</li>
-                    <li class="text-sm text-stone-400 duration-500 cursor-pointer hover:text-yellow-500 py-1">پت فیلم</li>
-                    <li class="text-sm text-stone-400 duration-500 cursor-pointer hover:text-yellow-500 py-1">پت مارکت</li>
+                    <li v-for="(link , index) in links" :key="link.id" class="text-sm text-stone-400 duration-500 cursor-pointer hover:text-yellow-500 py-1">
+                        <a :href="link.url" target="_blank">{{ link.title }}</a>
+                    </li>
                 </ul>
 
             </div>
@@ -55,7 +53,32 @@
         </div>
     </footer>
 </template>
-<script setup></script>
+<script setup>
+
+import { usePetfilmStore } from '~/store/petfilmStore';
+
+const links = ref([])
+const description = ref(null)
+
+const store = usePetfilmStore()
+
+onMounted(() => {
+    getFooterDetails()
+})
+
+const getFooterDetails = async() => {
+    const descriptionresult = await store.getFooterDescription()
+    if(descriptionresult.status == 200) {
+        description.value = descriptionresult.data[0].description
+    }
+
+    const linksResult = await store.getFooterLinks()
+    if(linksResult.status == 200) {
+        links.value = linksResult.data
+    }
+}
+
+</script>
 
 <style scoped>
 .cls-1 {
