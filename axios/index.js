@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create({
-    baseURL: "http://localhost:8000/api/front"
+    baseURL: "https://petfilmapi.petoman.com/api/front"
 })
 
 export default api

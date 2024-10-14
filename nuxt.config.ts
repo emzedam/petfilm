@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      appBaseUrl: 'http://localhost:8000'
+      appBaseUrl: 'https://petfilmapi.petoman.com'
     }
   },
   compatibilityDate: '2024-04-03',
